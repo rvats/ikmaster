@@ -5,7 +5,13 @@ public class SortDutchFlag
 {
     public static void Main()
     {
-        var list = new List<char> { 'R', 'G', 'B'};
+        var list = new List<char> { 'B', 'R', 'G' };
+        SortDutchFlag(list);
+
+        list = new List<char> { 'B', 'R', 'G', 'B', 'B', 'R', 'G', 'B', 'R', 'G' };
+        SortDutchFlag(list);
+
+        list = new List<char> { 'R', 'R', 'R', 'R', 'G', 'G', 'G', 'G', 'B', 'B', 'B', 'B' };
         SortDutchFlag(list);
     }
 
