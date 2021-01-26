@@ -28,5 +28,6 @@ class Sorting:
         return numbers
 
 if __name__ == '__main__':
+    print("Selection Sort Demo")
     print(Sorting().selectionSort1([5,4,3,2,1]))
     print(Sorting().selectionSort2([5,4,3,2,1]))
