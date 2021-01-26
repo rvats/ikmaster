@@ -4,7 +4,7 @@ class Sorting:
     # 2) Remaining subarray which is unsorted.
     # In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray.
 
-    #@selectionSort1 self, nums):
+    #@selectionSort1
     def selectionSort1(self, numbers):
         for i in range(len(numbers)): 
             # Find the minimum element in remaining  
@@ -18,7 +18,7 @@ class Sorting:
             numbers[i], numbers[min_idx] = numbers[min_idx], numbers[i] 
         return numbers
 
-    # @selectionSort2, TLE
+    # @selectionSort2
     def selectionSort2(self, numbers):
         for i in range(len(numbers)): # O(n)
             _min = min(numbers[i:]) # Combining the second for loop into a min function call Time Complexity is still O(n)
