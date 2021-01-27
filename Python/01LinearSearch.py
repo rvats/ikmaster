@@ -1,47 +1,25 @@
-class Sorting:
+class Search:
     # Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
 
-    #@bubbleSort, TLE
-    def bubbleSort(self, numbers):
+    #@linearSearch
+    def linearSearch(self, numbers, target):
         n = len(numbers) 
         # Traverse through all array elements 
         for i in range(n): 
-            # Last i elements are already in place
-            for j in range(0, n-i-1): 
-                # traverse the array from 0 to n-i-1 
-                # Swap if the element found is greater 
-                # than the next element 
-                if numbers[j] > numbers[j+1] : 
-                    numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
-        return numbers
-
-    # An optimized version of Bubble Sort 
-    def bubbleSortOptimized(self, numbers): 
-        n = len(numbers) 
-   
-        # Traverse through all array elements 
-        for i in range(n): 
-            swapped = False
-  
-            # Last i elements are already 
-            #  in place 
-            for j in range(0, n-i-1): 
-   
-                # traverse the array from 0 to 
-                # n-i-1. Swap if the element  
-                # found is greater than the 
-                # next element 
-                if numbers[j] > numbers[j+1] : 
-                    numbers[j], numbers[j+1] = numbers[j+1], numbers[j] 
-                    swapped = True
-  
-            # IF no two elements were swapped 
-            # by inner loop, then break 
-            if swapped == False: 
-                break
-        return numbers
+            if(numbers[i]==target):
+                return i
+        return -1
 
 if __name__ == '__main__':
-    print("Bubble Sort Demo")
-    print(Sorting().bubbleSort([5,4,3,2,1]))
-    print(Sorting().bubbleSortOptimized([5,4,3,2,1]))
+    print("Linear Search Demo")
+    print("Searching 0 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],0)," Found: ", Search().linearSearch([1,3,5,7,9],0)>=0)
+    print("Searching 1 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],1)," Found: ", Search().linearSearch([1,3,5,7,9],1)>=0)
+    print("Searching 2 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],2)," Found: ", Search().linearSearch([1,3,5,7,9],2)>=0)
+    print("Searching 3 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],3)," Found: ", Search().linearSearch([1,3,5,7,9],3)>=0)
+    print("Searching 4 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],4)," Found: ", Search().linearSearch([1,3,5,7,9],4)>=0)
+    print("Searching 5 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],5)," Found: ", Search().linearSearch([1,3,5,7,9],5)>=0)
+    print("Searching 6 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],6)," Found: ", Search().linearSearch([1,3,5,7,9],6)>=0)
+    print("Searching 7 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],7)," Found: ", Search().linearSearch([1,3,5,7,9],7)>=0)
+    print("Searching 8 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],8)," Found: ", Search().linearSearch([1,3,5,7,9],8)>=0)
+    print("Searching 9 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],9)," Found: ", Search().linearSearch([1,3,5,7,9],9)>=0)
+    print("Searching 10 in [1,3,5,7,9]: Found at Index: ",Search().linearSearch([1,3,5,7,9],10)," Found: ", Search().linearSearch([1,3,5,7,9],10)>=0)
