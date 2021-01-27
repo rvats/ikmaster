@@ -1,7 +1,7 @@
 class Sorting:
     # Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
 
-    #@bubbleSort, TLE
+    #@bubbleSort
     def bubbleSort(self, numbers):
         n = len(numbers) 
         # Traverse through all array elements 
