@@ -35,7 +35,7 @@ class Sorting:
  
         # Build the output character array
         for i in range(len(numbers)-1, -1, -1):
-            output_arr[count_arr[numbers[i] - min_element] - 1] = arr[i]
+            output_arr[count_arr[numbers[i] - min_element] - 1] = numbers[i]
             count_arr[numbers[i] - min_element] -= 1
  
         # Copy the output array to arr, so that arr now
@@ -48,4 +48,4 @@ class Sorting:
 if __name__ == '__main__':
     print("Count Sort Demo")
     numbers = [9,8,7,6,5,4,3,2,1,0] 
-    print(Sorting().bucketSort(numbers))
+    print(Sorting().countSort(numbers))
