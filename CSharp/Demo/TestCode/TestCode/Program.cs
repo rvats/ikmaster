@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 public static class Solution
 {
@@ -15,8 +15,7 @@ public static class Solution
     private static string CalculateLargestString(int[] nums)
     {
         Array.Sort(nums, (a, b) => (b + "" + a).CompareTo(a + "" + b));
-        foreach (var num in nums)
-        {
+        foreach (var num in nums) {
             Console.WriteLine(num);
         }
         return nums[0] == 0 ? "0" : string.Join("", nums);
