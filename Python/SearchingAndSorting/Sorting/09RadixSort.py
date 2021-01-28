@@ -1,4 +1,3 @@
-# do this:
 import random
 class Sorting:
     # The lower bound for Comparison based sorting algorithm (Merge Sort, Heap Sort, Quick-Sort .. etc) is Ω(nLogn), i.e., they cannot do better than nLogn. 
@@ -64,11 +63,15 @@ class Sorting:
         while max1 / exp > 0: 
             self.countingSort(arr, exp) 
             exp *= 10 
+        return arr
 
 if __name__ == '__main__':
     print("Radix Sort Demo")
     numbers = []
-    for _ in range(1000000):
+    for _ in range(20):
         n = random.randint(100000,9999999) # whatever your range of random numbers is
         numbers.append(n)
+    print("Numbers before Sorting: ")
+    print(numbers)
+    print("Numbers after Sorting: ")
     print(Sorting().radixSort(numbers))
