@@ -35,7 +35,7 @@ class Solution:
         res = res[::-1]
         return res
 
-    def highFiveMaxHeap(self, items):
+    def highFiveSortedCollection(self, items):
         scores = collections.defaultdict(list)
         for item in items:
             scores[item[0]].append(item[1])
@@ -44,6 +44,19 @@ class Solution:
             scores[key] = sorted(scores[key], reverse = True)
             result.append([key, sum(scores[key][0:5]) // 5])
         return result
+
+    def highFiveMaxHeap(self, items: List[List[int]]) -> List[List[int]]:
+        students = collections.defaultdict(list)
+        results = []
+
+        for student, score in items:
+            heapq.heappush(students[student], -score)
+
+        for student in students:
+            avg_scores = sum(-heapq.heappop(students[student]) for i in range(0, 5)) // 5
+            results.append((student, avg_scores))
+
+        return results
 
 if __name__ == '__main__':
     print("Shuffle String Demo")
