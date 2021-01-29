@@ -8,9 +8,9 @@ def generate_all_expressions(s, target):
         return []
     output = []
 
-    def _dfs(so_far, evaluated, idx, prev):
+    def _dfs(currentExpression, evaluated, idx, prev):
         """
-        :param so_far: expression so far (string)
+        :param currentExpression: expression so far (string)
         :param evaluated: evaluated value so far (int)
         :param idx: index to start recursing from
         :param prev: prev value to use for the multiplication special case to give it precedence (explained
@@ -19,7 +19,7 @@ def generate_all_expressions(s, target):
         """
         if idx == len(s):
             if evaluated == target:
-                output.append(so_far)
+                output.append(currentExpression)
             return
 
         for i in range(idx, len(s)):
@@ -34,9 +34,9 @@ def generate_all_expressions(s, target):
                 # it more DRY since we will have to do the curr and curr_int outside otherwise for 1234 case,
                 #   when idx = 0, we will have 1, 12, 123, 1234
                 # prev value is just current_int (which is same as evaluated)
-                _dfs(so_far + curr, curr_int, i+1, curr_int)
+                _dfs(currentExpression + curr, curr_int, i+1, curr_int)
             else:
-                _dfs(so_far + '+' + curr, evaluated+curr_int, i+1, curr_int)
+                _dfs(currentExpression + '+' + curr, evaluated+curr_int, i+1, curr_int)
                 # Detailed explanation is in optimal_solution.cpp.
                 # In short, we need to give precedence to multiplication, e.g. if we have a+b*c,
                 # we really want a+(b*c), not (a+b)*c.
@@ -44,7 +44,7 @@ def generate_all_expressions(s, target):
                 #   (ev - prev) + (prev * curr) will give us (a + b - b) + (b * c) = a + (b * c)
                 # For prev multiplication; ev = (a * b), prev = a * b, curr = c; so current calculation
                 #   (ev - prev) + (prev * curr) will give us (a * b - a * b) + (a * b * c) = a * b * c
-                _dfs(so_far + '*' + curr, (evaluated-prev) + (prev*curr_int), i+1, prev*curr_int)
+                _dfs(currentExpression + '*' + curr, (evaluated-prev) + (prev*curr_int), i+1, prev*curr_int)
 
     _dfs('', 0, 0, 0)
     return output
