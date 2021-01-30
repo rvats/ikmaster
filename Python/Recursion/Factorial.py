@@ -1,7 +1,7 @@
 import sys 
 
 factorialMap = {}
-def factorialNaive(number):
+def factorial(number):
     if number <= 1:
         return 1
     else:
@@ -81,4 +81,4 @@ def factorialIterativeOptimized(number):
             factorial *= number
         return factorial
 
-print(factorialNaive(100))
+print(factorial(100))
