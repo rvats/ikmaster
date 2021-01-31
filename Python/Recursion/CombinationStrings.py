@@ -1,4 +1,4 @@
-# Combination Helper
+# Combination Helper Wrong Code
 def combinationHelper(dataCollected, inputSet):
     inputSetLength = len(inputSet)
     if inputSetLength == 0:
@@ -20,7 +20,8 @@ def combinationGenerator(dataCollected, inputSet):
         print(dataCollected)
     for i in range(inputSetLength): 
         combinationGenerator(dataCollected, inputSet[i + 1:])
-        dataCollected.append([inputSet[i]]) 
+        if(inputSet[i] not in dataCollected):
+            dataCollected.append([inputSet[i]]) 
         combinationGenerator(dataCollected, inputSet[i + 1:])
 # Driver code 
 if __name__=="__main__": 
