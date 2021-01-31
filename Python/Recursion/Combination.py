@@ -20,14 +20,10 @@ print("Pascal Triangle for n = 10")
 n = 11
 for i in range(n): 
     for j in range(n-i+1): 
-  
         # for left spacing 
         print(end=" ") 
-  
     for j in range(i+1): 
-  
         # nCr = n!/((n-r)!*r!) 
         print(combinationNaive(i,j), end=" ") 
-  
     # for new line 
     print() 
