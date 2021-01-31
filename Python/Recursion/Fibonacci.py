@@ -23,7 +23,7 @@ Resources:
 https://towardsdatascience.com/memoization-in-python-57c0a738179a
 '''
 # Fibonacci Series No Optimization
-# Time Complexity = O(n) Space Complexity = O(n)
+# Time Complexity = O(n^2) Space Complexity = O(1)
 def fibonacciNaive(number):
     if number <= 2:
         return 1
