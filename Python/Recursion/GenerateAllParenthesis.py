@@ -10,11 +10,13 @@ def generateAllParenthesisHelper(remainingOpen, remainingClose, soFar):
         if  remainingOpen > 0:
             soFar+="("
             generateAllParenthesisHelper(remainingOpen-1, remainingClose, soFar)
-            soFar[:-1]
+            start, end = 0, len(soFar) - 1
+            soFar[start:end]
         if remainingClose > 0:
             soFar+=")"
             generateAllParenthesisHelper(remainingOpen, remainingClose-1, soFar)
-            soFar[:-1]
+            start, end = 0, len(soFar) - 1
+            soFar[start:end]
 
 generateAllParenthesisDriver(2)
 
