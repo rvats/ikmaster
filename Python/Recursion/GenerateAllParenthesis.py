@@ -18,7 +18,7 @@ def generateAllParenthesisHelper(remainingOpen, remainingClose, soFar):
             start, end = 0, len(soFar) - 1
             soFar[start:end]
 
-generateAllParenthesisDriver(2)
+generateAllParenthesisDriver(3)
 
 '''
 (())
