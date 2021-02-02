@@ -68,7 +68,7 @@ def generate_all_expressions(s, target):
                 # the expressionSoFar + "*" + currentString = 1+2*3 as string which should evaluated to 1+(2*3) which is 7 and not (1+2)*3 which is 9 
                 # In order to get 1 from 3 which is evaluatedValueSoFar we need to subtract the previousValue 2 from evaluated value which is 3
                 # This expression arise from the InFix Tree for the expression and is dependent on the operators precedence.
-                generate_all_expressions_dfs_helper(expressionSoFar + '*' + currentString, (evaluatedValueSoFar-valueUpdateAtParentStep) + (valueUpdateAtParentStep*currentStringValue), i+1, previousValue*currentStringValue)
+                generate_all_expressions_dfs_helper(expressionSoFar + '*' + currentString, (evaluatedValueSoFar-valueUpdateAtParentStep) + (valueUpdateAtParentStep*currentStringValue), i+1, valueUpdateAtParentStep*currentStringValue)
 
                 # For this expression the previous Value cannot be total Value so far it needs to be just the currentStringValue
                 generate_all_expressions_dfs_helper(expressionSoFar + '+' + currentString, evaluatedValueSoFar+currentStringValue, i+1, currentStringValue)
@@ -78,3 +78,5 @@ def generate_all_expressions(s, target):
 
 print(generate_all_expressions("123",6))
 print(generate_all_expressions("2222",224))
+print(generate_all_expressions("050505",5))
+print(eval("1+2"))
