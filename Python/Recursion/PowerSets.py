@@ -6,7 +6,7 @@ def powerSet(inputSet):
 
 def powerSetHelper(inputSet, index, slate, powerSetCollection):
     if index == len(inputSet):
-        print(slate)
+        # print(slate)
         powerSetCollection.insert(len(powerSetCollection),slate[:])
     else:
         powerSetHelper(inputSet, index+1, slate, powerSetCollection)
@@ -14,4 +14,4 @@ def powerSetHelper(inputSet, index, slate, powerSetCollection):
         powerSetHelper(inputSet,index+1,slate, powerSetCollection)
         slate.pop()
 
-print(powerSet(["1","2","3"]))
+print(powerSet([1,2,3]))
