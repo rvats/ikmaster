@@ -12,14 +12,15 @@ def generatePrintableLinkedList(linkedList):
 	return printableLinkedList
 
 def removeDuplicatesFromLinkedList(linkedList):
-	current = linkedList
-	previous = current
-	while current.next is not None:
-		if current.value == current.next.value:
-			current = current.next
-		else:
-			previous.next = current.next
-			current = current.next
+	currentNode = linkedList
+	while currentNode is not None:
+		nextDistinctNode = currentNode.next
+		while nextDistinctNode is not None and nextDistinctNode.value == currentNode.value:
+			nextDistinctNode = nextDistinctNode.next
+		
+		currentNode.next=nextDistinctNode
+		currentNode=nextDistinctNode
+		
 	return linkedList
 
 # list = 1 -> 1 -> 3 -> 4 -> 4 -> 4 -> 5 -> 6 -> 6 
