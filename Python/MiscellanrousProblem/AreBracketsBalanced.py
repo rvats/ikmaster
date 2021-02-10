@@ -13,4 +13,7 @@ def balancedBrackets(string):
 		return False
 
 print(balancedBrackets("(141[])(){waga}((51afaw))()hh()"))
-
+print(balancedBrackets("([])(){}(())(({{[[]]}}))"))
+print(balancedBrackets("((({{{[[[]]]}}})))"))
+print(balancedBrackets("((({{{[[[]]]}}})))}"))
+print(balancedBrackets("{((({{{[[[]]]}}})))"))
