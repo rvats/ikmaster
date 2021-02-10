@@ -74,6 +74,28 @@ def validateBst(tree, isValidBST = True):
 		return (isBSTUtil(node.left, minValue, node.value) and isBSTUtil(node.right, node.value, maxValue))
 	return (isBSTUtil(tree, float("-inf"), float("inf")))
 
+def inOrderTraverse(tree, array):
+	if tree is not None:
+		inOrderTraverse(tree.left, array)
+		array.append(tree.value)
+		inOrderTraverse(tree.right, array)
+	return array
+
+
+def preOrderTraverse(tree, array):
+	if tree is not None:
+		array.append(tree.value)
+		preOrderTraverse(tree.left, array)
+		preOrderTraverse(tree.right, array)
+	return array
+
+def postOrderTraverse(tree, array):
+	if tree is not None:
+		postOrderTraverse(tree.left, array)
+		postOrderTraverse(tree.right, array)
+		array.append(tree.value)
+	return array
+
 
 bst = BST(10)
 bst.left = BST(5)
@@ -86,6 +108,12 @@ bst.right.left.right = BST(14)
 bst.right.right = BST(22)
 print(bst.insert(12))
 print(validateBst(bst))
+print(inOrderTraverse(bst,[]))
+print(preOrderTraverse(bst,[]))
+print(postOrderTraverse(bst,[]))
 print(bst.remove(10))
 print(bst.contains(14))
 print(validateBst(bst))
+print(inOrderTraverse(bst,[]))
+print(preOrderTraverse(bst,[]))
+print(postOrderTraverse(bst,[]))
