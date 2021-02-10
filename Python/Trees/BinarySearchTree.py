@@ -65,6 +65,16 @@ class BST:
 		else:
 			return self.left.getMinValue()
 
+def validateBst(tree, isValidBST = True):
+	def isBSTUtil(node, minValue, maxValue):
+		if node is None:
+			return True
+		if node.value < minValue or node.value >= maxValue:
+			return False
+		return (isBSTUtil(node.left, minValue, node.value) and isBSTUtil(node.right, node.value, maxValue))
+	return (isBSTUtil(tree, float("-inf"), float("inf")))
+
+
 bst = BST(10)
 bst.left = BST(5)
 bst.left.left = BST(2)
@@ -75,5 +85,7 @@ bst.right.left = BST(13)
 bst.right.left.right = BST(14)
 bst.right.right = BST(22)
 print(bst.insert(12))
+print(validateBst(bst))
 print(bst.remove(10))
 print(bst.contains(14))
+print(validateBst(bst))
