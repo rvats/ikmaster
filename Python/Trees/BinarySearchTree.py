@@ -96,6 +96,38 @@ def postOrderTraverse(tree, array):
 		array.append(tree.value)
 	return array
 
+def minHeightBst(array):
+	def minHeightBstHelper(array, start, end):
+		if end < start:
+			return None
+		mid = (start + end) // 2
+		bst = BST(array[mid])
+		bst.left = minHeightBstHelper(array, start, mid-1)
+		bst.right = minHeightBstHelper(array, mid+1, end)
+		return bst
+	return minHeightBstHelper(array, 0, len(array)-1)
+
+class TreeInfo:
+	def __init__(self, diameter, height):
+        self.diameter = diameter
+        self.height = height
+		
+def binaryTreeDiameter(tree):
+    return getTreeInfo(tree).diameter
+
+def getTreeInfo(tree):
+	if tree is None:
+		return TreeInfo(0,0)
+	
+	leftTreeInfo = getTreeInfo(tree.left)
+	rightTreeInfo = getTreeInfo(tree.right)
+	
+	longestPathThroughRoot = leftTreeInfo.height + rightTreeInfo.height
+	maxDiameterSoFar = max(leftTreeInfo.diameter, rightTreeInfo.diameter)
+	currentDiameter = max(longestPathThroughRoot, maxDiameterSoFar)
+	currentHeight = 1 + max(leftTreeInfo.height, rightTreeInfo.height)
+	
+	return TreeInfo(currentDiameter, currentHeight)
 
 bst = BST(10)
 bst.left = BST(5)
@@ -114,6 +146,11 @@ print(postOrderTraverse(bst,[]))
 print(bst.remove(10))
 print(bst.contains(14))
 print(validateBst(bst))
+print(inOrderTraverse(bst,[]))
+print(preOrderTraverse(bst,[]))
+print(postOrderTraverse(bst,[]))
+
+bst = minHeightBst([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 print(inOrderTraverse(bst,[]))
 print(preOrderTraverse(bst,[]))
 print(postOrderTraverse(bst,[]))
