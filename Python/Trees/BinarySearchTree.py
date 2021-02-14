@@ -65,6 +65,12 @@ class BST:
 		else:
 			return self.left.getMinValue()
 
+	def getMaxValue(self):
+		if self.right is None:
+			return self.value
+		else:
+			return self.right.getMaxValue()
+
 def validateBst(tree, isValidBST = True):
 	def isBSTUtil(node, minValue, maxValue):
 		if node is None:
@@ -109,8 +115,8 @@ def minHeightBst(array):
 
 class TreeInfo:
 	def __init__(self, diameter, height):
-        self.diameter = diameter
-        self.height = height
+		self.diameter = diameter
+		self.height = height
 		
 def binaryTreeDiameter(tree):
     return getTreeInfo(tree).diameter
@@ -154,3 +160,5 @@ bst = minHeightBst([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 print(inOrderTraverse(bst,[]))
 print(preOrderTraverse(bst,[]))
 print(postOrderTraverse(bst,[]))
+print(bst.getMinValue())
+print(bst.getMaxValue())
