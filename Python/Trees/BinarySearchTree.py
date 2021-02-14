@@ -60,16 +60,18 @@ class BST:
 		return self
 	
 	def getMinValue(self):
-		if self.left is None:
-			return self.value
-		else:
-			return self.left.getMinValue()
+		if self is None:
+			return float("-inf")
+		while self.left is not None:
+			self = self.left
+		return self.value
 
 	def getMaxValue(self):
-		if self.right is None:
-			return self.value
-		else:
-			return self.right.getMaxValue()
+		if self is None:
+			return float("inf")
+		while self.right is not None:
+			self = self.right
+		return self.value
 
 def validateBst(tree, isValidBST = True):
 	def isBSTUtil(node, minValue, maxValue):
@@ -162,3 +164,4 @@ print(preOrderTraverse(bst,[]))
 print(postOrderTraverse(bst,[]))
 print(bst.getMinValue())
 print(bst.getMaxValue())
+
