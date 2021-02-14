@@ -160,4 +160,7 @@ print(preOrderTraverse(bst,[]))
 print(postOrderTraverse(bst,[]))
 print(bst.getMinValue())
 print(bst.getMaxValue())
-
+print(bst.left.left.left.getMinValue())
+print(bst.left.left.left.getMaxValue())
+print(bst.right.right.right.getMinValue())
+print(bst.right.right.right.getMaxValue())
