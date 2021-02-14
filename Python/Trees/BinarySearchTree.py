@@ -60,15 +60,11 @@ class BST:
 		return self
 	
 	def getMinValue(self):
-		if self is None:
-			return float("-inf")
 		while self.left is not None:
 			self = self.left
 		return self.value
 
 	def getMaxValue(self):
-		if self is None:
-			return float("inf")
 		while self.right is not None:
 			self = self.right
 		return self.value
