@@ -12,11 +12,15 @@ Example 1:
 Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
 Output: true
 '''
-def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-    if len(s1) + len(s2) != len(s3):
+def isInterleave(s1: str, s2: str, s3: str) -> bool:
+    r, c, l= len(s1), len(s2), len(s3)
+    if r+c != l:
         return False
-    ilMap = [[False for row in range(len(s1)+1)] for col in range(len(s2)+1)]
-    for s1idx in range(len(s1)+1):
-        for s2idx in range(len(s2)+1):
-            ilMap[s1idx][s2idx] = (s1idx == 0 and s2idx ==0) or (s1idx > 0 and ilMap[s1idx-1][s2idx] and s1[s1idx]==s3[s1idx+s2idx]) or (s2idx > 0 and ilMap[s1idx][s2idx-1] and s2[s2idx]==s3[s1idx+s2idx])
-    return ilMap[len(s1)][len(s2)]
+    dp = [True for _ in range(c+1)] 
+    for j in range(1, c+1):
+        dp[j] = dp[j-1] and s2[j-1] == s3[j-1]
+    for i in range(1, r+1):
+        dp[0] = (dp[0] and s1[i-1] == s3[i-1])
+        for j in range(1, c+1):
+            dp[j] = (dp[j] and s1[i-1] == s3[i-1+j]) or (dp[j-1] and s2[j-1] == s3[i-1+j])
+    return dp[-1]
