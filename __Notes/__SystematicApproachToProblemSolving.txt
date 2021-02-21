@@ -17,6 +17,6 @@ In case we suspect DP
 Sort Examples smaller to big
 Treat Each Examples as a puzzle
 
-Possible Scores:
+Possible Solution:
 Question
 Example
