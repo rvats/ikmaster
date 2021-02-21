@@ -16,3 +16,7 @@ Don't think about DS, algorithms, loops
 In case we suspect DP
 Sort Examples smaller to big
 Treat Each Examples as a puzzle
+
+Possible Scores:
+Question
+Example
