@@ -9,3 +9,10 @@ Typical Patterns of DP Problems (First 2 Set account for 95% of DP problems)
 	Count Something
 	Sequences (often for strings)
 	Combinatorial Games
+Dynamic Programming
+Solve Examples
+Use the language of the problem
+Don't think about DS, algorithms, loops
+In case we suspect DP
+Sort Examples smaller to big
+Treat Each Examples as a puzzle
