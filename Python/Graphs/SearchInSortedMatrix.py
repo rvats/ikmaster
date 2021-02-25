@@ -1,20 +1,13 @@
 def searchInSortedMatrix(matrix, target):
-	for row in range(len(matrix)):
-		result = binarySearch(row, matrix[row], target)
-		if result != [-1,-1]:
-			return result
-	return[-1,-1]
-	
-def binarySearch(row, array, target):
-	start, end = 0, len(array)-1
-	while start <= end:
-		mid = start+(end-start)//2
-		if array[mid] == target:
-			return [row, mid]
-		elif array[mid] > target:
-			end = mid-1
-		elif array[mid] < target:
-			start = mid+1
+	row = 0
+	col = len(matrix[row])-1
+	while row < len(matrix) and col>=0:
+		if matrix[row][col] > target:
+			col-=1
+		elif matrix[row][col] < target:
+			row+=1
+		else:
+			return [row,col]
 	return [-1,-1]
 
 matrix = [
