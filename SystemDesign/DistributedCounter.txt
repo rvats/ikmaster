@@ -1,0 +1,140 @@
+The Problem Statement: Raffle to 100 billionth Visitor?
+We are going to implement a shared static Distributed Counter
+
+Functional Assumptions:
+	Do I count request to gmail/google/youtube together or separately?
+	Are we going to do count my transaction or IP address?
+	
+
+Functional Requirements:
+	Increment a counter structure atomically
+	Consume Request (Visitor) from a message queue on an Aggregator machine
+	Retrieve counter value
+
+Design constraints:
+	Rate of incoming Requests (Visitor)
+	10s to 1000s of reuests per second
+	{Google handles 60000 searches per second, each search resulting in increment request}
+	* - Rate of retrieval of the counter
+
+Microservices Architecture Pattern:
+	Publisher-Subscriber for request event collection
+	
+===================================================
+Counter Service: 
+	1) Ingests and takes count of Requests from Publisher-Subscriber (From All Servers), Increments counter
+	2) Handles retrieval requests - Retrieve Counter Value
+
+Logic: Proposal 1
+	App-server tier/In-memory tier
+	Consumes request
+	Data Model: Counter id (K): A single integer (V)
+	Updates a single integer variable in memory atomically
+	Storage tier
+	Checkpoint occasionally for disaster recovery
+	APIs
+	IncrementCounter
+	ReadCounter
+	All APIs handled through in-memory tier
+
+Need to Scale: Proposal 1
+Need to scale for storage - No
+Need to scale for throughput - Yes
+Need to scale for hotspot reduction - Definitely
+Need to scale for API parallelization - No
+Availability - yes
+Geo-distribution - N/A
+
+
+How to Scale: Proposal 1
+Single counter
+Cannot be sharded
+Only replicated
+Replication using CRDT
+Multiple replicas of the counter
+N = numerous
+However, increments are applied only one replica
+W = 1
+Read API also uses one replica
+R = 1
+So, R + W < N, an AP system, eventually consistent system
+
+CRDT
+Each replica maintains a vector of counts
+
+Let’s assume there are 7 replicas
+Replica A: [its own counter][counter from replica B][C][D][E][F][G]
+Replica B: [counter from replica A][its own counter][C][D][E][F][G]
+B:[3][4][1][0][0][23][1]
+From A: [5][1][7][0][0][24][2]
+B:[5][4][7][0][0][24][2]
+
+Whenever a write is applied to any replica
+It increments its own counter and broadcasts the full vector to other replicas
+
+
+CRDT
+On receiving a message from other replica
+The replica compares each entry in its own vector with that in the message
+For (i = 0; i < 7; ++i) 
+If (ownvector[i] < messagevector[i]) ownvector[i] = messagevector[i];
+
+Very easy to resolve conflict using the above function
+Counters will always increment. If a counter from another replica is larger than the same counter in my replica, the other counter is more current, because counters are temporally incremental
+Which is why, it is called Conflict-Free Replicated Data Type
+
+
+
+Logic: Proposal 2
+App-server tier/In-memory tier
+Consumes request
+Data Model: Counter id (K): List of integers (V) 
+Storage tier
+Checkpoint occasionally for disaster recovery
+APIs
+IncrementCounter: Hash on one of the entries in the list and increment
+ReadCounter: Sum total of integer entries in the list
+All APIs handled through in-memory tier
+
+
+Need to Scale: Proposal 2
+Need to scale for storage - No
+Need to scale for throughput - Yes
+Need to scale for hotspot reduction - No
+Single server logic takes care of hotspot reduction
+Need to scale for API parallelization - Yes
+Read is an O(N) algorithm
+Availability - yes
+Geo-distribution - N/A
+
+
+How to Scale: Proposal 2
+Similar to an analytics problem
+Bottleneck is the size of the list
+O(N), where N is the size of the list
+Shard the list
+Since list is the value, vertical sharding
+Each increment is forwarded to a single shard
+Scatter gather to retrieve global value of the counter
+Scatter gather is a throughput killer
+So cache the global count and perform scatter gather in regular intervals
+AP system
+
+Proposal 1 vs Proposal 2
+Pro
+Con
+Proposal 1
+No scatter gather for reads
+Chatty
+Proposal 2
+Non-chatty
+Scatter gather for reads
+
+CP or AP
+Depending on the application, you may have to build CP or AP system
+CP nearly infeasible in both approaches described
+For example, in the billionth car problem
+Follow either proposal 1 or proposal 2 (AP) for 99.9x% of increment requests
+Then switch logic to CP
+In proposal 1, start using one counter for increments
+In proposal 2, start using one shard for increments
