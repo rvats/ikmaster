@@ -1,0 +1,38 @@
+The Problem Statement: Trending Topics
+We are going to implement functionality similar to Trending Topics on Twitter:
+What I know:
+People Tweet, They add various HashTags to make their tweet trend.
+When A certain percentage of twitter user are using the same hash tag in a given time frame: 
+That topic trends
+Disaster: Texas Power Failure: They are curating 
+
+=================================================================================
+Discuss with Interviewer(Clarifying Questions To Ask): 
+
+Functional Assumptions:
+	We are going to count number of HashTag is used to determine a trending topic
+	
+Functional Requirements:
+	Going to have to look into creating Counter: 
+	Key things here are: 
+	HashTag
+	Real time So time frame or time range: 5 Minutes
+	Region Specific: 1 Million Users Percentage of Users 5%
+	Consume Request (Visitor) from a message queue on an Aggregator machine
+	Retrieve counter value
+
+Design constraints:
+	Rate of incoming Requests (Visitor)
+	100000 Tweets per sec 30,000,000
+	1 Million Users 5% of that will be 50,000
+=================================================================================	
+What Services We Need:
+Existing Microservices:
+Tweet Functionality 
+Microservices Architecture Pattern: Scatter Gather
+
+
+Tweet Comprises of HashTags We parsed them 
+Database Key Value Store Each HashTag - (Counter)
+New York Server(s) We have million user We have to calculate when Number of Users Using A particular HashTag reaches 50000
+Reverse Indexing: Value of KV pair I defined above
