@@ -1,5 +1,5 @@
 The Problem Statement: Raffle to 100 billionth Visitor?
-We are going to implement a shared static Distributed Counter
+We are going to implement a Distributed Counter
 
 =================================================================================
 Discuss with Interviewer(Clarifying Questions To Ask): 
@@ -21,15 +21,7 @@ Design constraints:
 	* - Rate of retrieval of the counter
 
 =================================================================================	
-What Services We Need:
-Remember Microservices and SOA:
 
-Microservices Architecture Pattern:
-	Publisher-Subscriber for request event collection
-Services We should create:
-	Counter Service: 
-		1) Ingests and takes count of Requests from Publisher-Subscriber (From All Servers), Increments counter
-		2) Handles retrieval requests - Retrieve Counter Value
 
 Logic: Proposal 1
 	App-server tier/In-memory tier
