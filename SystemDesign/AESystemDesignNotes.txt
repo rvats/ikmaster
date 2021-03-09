@@ -2,7 +2,17 @@ What are System Design Fundamentals?: Building scalable, production-ready applic
 	There are 4 categories of System Design Fundamentals:
 		Underlying Foundational System Design Knowledge: e.g. Client Server Model, Network Protocols
 		Key Characteristics of System Design: e.g. 
-			1) Availability: What is system availability? System availability (also known as equipment availability or asset availability) is a metric that measures the probability that a system is not failed or undergoing a repair action when it needs to be used. There are three qualifications that need to be met for a system to be available: 
+			1) Availability: What is system availability? System availability (also known as equipment availability or asset availability) is a metric that measures the probability that a system is not failed or undergoing a repair action when it needs to be used. / The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two NINES of availability).
+				High Availability: Used to describe systems that have particularly high levels of availability, typically 5 nines or more; sometimes abbreviated "HA".
+				Nines: Typically refers to percentages of uptime. For example, 5 nines of availability means an uptime of 99.999% of time. Below are the downtimes expected per year depending on those 9s:
+				99% (two 9s): 87.7 hours
+				99.9% (three 9s): 8.8 hours
+				99.99% (four 9s): 52.6 minutes
+				99.999%: 5.3 minutes
+				Redundancy: The process of replicating parts of a system in an effort to make it more reliable. 
+				SLA: Short for "Service Level Agreement", an SLA is a collection of guarantees given to a customer by a service provider. SLAs typically make guarantees on a system's availability, amongst other things. SLAs are made up of one or multiple SLOs. 
+				SLO: Short for "Service Level Objective", an SLO is a guarantee given to a customer by a service provider. SLOs typically make guarantees on a system's availability, amongst other things. SLOs constitute an SLA.
+			There are three qualifications that need to be met for a system to be available: 
 				a) Functioning equipment: Not out of service for repairs or inspections.
 				b) Functioning under normal conditions: Operates in an ideal setting at an expected rate.
 				c) Functioning when needed: Operational at any time production is scheduled
@@ -18,8 +28,13 @@ What are System Design Fundamentals?: Building scalable, production-ready applic
 				99.9999%(Six Nines)			31.5 Seconds			2.59 Seconds			0.605 Seconds
 				99.99999%(Seven Nines)		3.15 Seconds			0.259 Seconds			0.0605 Seconds
 			In order to ensure Availability do horizontal Scaling with replication.
-			2) Latency:
-			3) Throughput:
+			2) Latency: The time it takes for a certain operation to complete in a system. Most often this measure is a time duration, like milliseconds or seconds. You should know these orders of magnitude:
+				Reading 1MB from RAM: 250 microseconds (0.25 milliseconds)
+				Reading 1MB from SSD: 1,000 microseconds (1 milliseconds)
+				Transferring 1MB over Network: 10,000 microseconds (10 milliseconds)
+				Reading 1MB from HDD: 20,000 microseconds (20 ms)
+				Inter-Continental Round Trip: 150,000 microseconds (150 ms)
+			3) Throughput: The number of operations that a system can handle properly per time unit. For instance the throughput of a server can often be measured in requests per second (RPS or QPS).
 			4) Redundancy:
 			5) Consistency:
 		Actual Components in System Design: e.g.
@@ -75,3 +90,26 @@ Storage: Information Storage is an incredibly complex topic that is of vital imp
 		SSD is far faster than HDD (see latencies of accessing data from SSD and HDD) but also far more expensive from a financial point of view. Because of that, HDD will typically be used for data that's rarely accessed or updated, but that's stored for a long time, and SSD will be used for data that's frequently accessed and updated. 
 	Memory: Short for Random Access Memory (RAM). Data stored in memory will be lost when the process that has written that data dies.
 	Persistent Storage: Usually refers to disk, but in general it is any form of storage that persists if the process in charge of managing it dies.
+Latency: The time it takes for a certain operation to complete in a system. Most often this measure is a time duration, like milliseconds or seconds. You should know these orders of magnitude:
+	Reading 1MB from RAM: 250 microseconds (0.25 milliseconds)
+	Reading 1MB from SSD: 1,000 microseconds (1 milliseconds)
+	Transferring 1MB over Network: 10,000 microseconds (10 milliseconds)
+	Reading 1MB from HDD: 20,000 microseconds (20 ms)
+	Inter-Continental Round Trip: 150,000 microseconds (150 ms)
+Throughput: The number of operations that a system can handle properly per time unit. For instance the throughput of a server can often be measured in requests per second (RPS or QPS).
+Availability: The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two NINES of availability).
+	High Availability: Used to describe systems that have particularly high levels of availability, typically 5 nines or more; sometimes abbreviated "HA".
+	Nines: Typically refers to percentages of uptime. For example, 5 nines of availability means an uptime of 99.999% of time. Below are the downtimes expected per year depending on those 9s:
+	99% (two 9s): 87.7 hours
+	99.9% (three 9s): 8.8 hours
+	99.99% (four 9s): 52.6 minutes
+	99.999%: 5.3 minutes
+	Redundancy: The process of replicating parts of a system in an effort to make it more reliable. 
+	SLA: Short for "Service Level Agreement", an SLA is a collection of guarantees given to a customer by a service provider. SLAs typically make guarantees on a system's availability, amongst other things. SLAs are made up of one or multiple SLOs. 
+	SLO: Short for "Service Level Objective", an SLO is a guarantee given to a customer by a service provider. SLOs typically make guarantees on a system's availability, amongst other things. SLOs constitute an SLA.
+Caching:
+	Cache: A piece of hardware or software that stores data, typically meant to retrieve that data faster than otherwise. Caches are often used to store responses to network requests as well as results of computationally-long operations. Note that data in a cache can become stale if the main source of truth for that data (i.e., the main database behind the cache) gets updated and the cache doesn't. 
+	Cache Hit: When requested data is found in a cache. 
+	Cache Miss: When requested data could have been found in a cache but isn't. This is typically used to refer to a negative consequence of a system failure or of a poor design choice. For example: If a server goes down, our load balancer will have to forward requests to a new server, which will result in cache misses. 
+	Cache Eviction Policy: The policy by which values get evicted or removed from a cache. Popular cache eviction policies include LRU (least recently used) FIFO (first in first out), and LFU (least-frequently used).
+	Content Delivery Network: A CDN is a third-party service that acts like a cache for your servers. Sometimes, web applications can be slow for users in a particular region if your servers are located only in another region. A CDN has servers all around the world, meaning that the latency to a CDN's servers will almost always be far better than the latency to your servers. A CDN's servers are often referred to as PoPs (Points of Presence). Two of the most poular CDNs are Cloudflare and Google Cloud CDN. 
