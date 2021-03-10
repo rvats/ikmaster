@@ -181,3 +181,11 @@ Sharding: Sometimes called data partitioning, sharding is the act of splitting a
 	Sharding based on the type of data being stored (e.g: user data gets stored in one shard, payments data gets stored in another shard).
 	Sharding based on the hash of a column (only for structured data)
 Hot Spot: When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your sharding key or your hashing function are suboptimal, or if your workload is naturally skewed: some servers will receive a lot more traffic than others, thus creating a "hot spot".
+
+Leader Election: 5 Key Terms
+	Leader Election: The process by which nodes in a cluster (for instance, servers in a set of servers) elect a so-called "leader" amongst them, responsible for the primary operations of the service that these nodes support. When correctly implemented, leader election guarantees that all nodes in the cluster know which one is the leader at any given time and can elect a new leader if the leader dies for whatever reason.
+	Consensus Algorithm: A type of complex algorithms used to have multiple entities agree on a single data value, like who the "leader" is amongst a group of machines. Two popular consensus algorithms are Paxos and Raft.
+	Paxos & Raft: Two consensus algorithms that, when implemented correctly, allow for the synchronization of certain operations, even in a distributed setting.
+	Etcd: This is a technology or product that you can use in your systems. Etcd is a strongly consistent and highly available key-value store that's often used to implement leader election in a system.
+	ZooKeeper: This is a technology or product that you can use in your systems. ZooKeeper is a strongly consistent, highly available key-value store. It's often used to store important configuration or to perform leader election.
+Configuration: A set of parameters or constants that are critical to a system. Configurationn is typically written in JSON or YAML and can be either static, meaning that it's hard-coded in and shipped with your system's application code (like frontend code, for instance), or dynamic, meaning that it lives outside of your system's application code.
