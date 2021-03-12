@@ -1,0 +1,34 @@
+Having Systematic Approach To Problem Solving (Key)
+Solving Hard Problems:
+Write Down / Take An Inventory of everything you do notice
+Can the problem be broken down into subproblems (Be Made Smaller)
+	Numbers can be reduced
+	Elements can be taken away from sequences
+Typical Patterns of DP Problems (First 2 Set account for 95% of DP problems)
+	Optimizations (Min, Max)
+	Count Something
+	Sequences (often for strings)
+	Combinatorial Games
+Dynamic Programming
+Solve Examples
+	Use the language of the problem
+	Don't think about DS, algorithms, loops
+	In case we suspect DP
+		Sort Examples smaller to big
+	Treat Each Examples as a puzzle
+When we know how to solve examples, formulate an algorithm
+
+Possible Solution:
+Question
+Example
+
+Time Management For Problems
+45 Minutes Interview
+	5 Minute Chit Chat
+	30 Minutes Finding Solution
+	10 Minutes Coding Solution
+Don't's for Practice
+	Spending more than 40 minutes
+	Looking Up Solution
+	Adding Print Statement or Debugging Logic
+	Coding beyond 10 minutes

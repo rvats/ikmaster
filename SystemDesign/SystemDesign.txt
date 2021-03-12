@@ -1,0 +1,8 @@
+System Design: 
+The goal of interviewer in system design is
+To see your breadth of problem solving 
+Discussion amongst equals
+Whether You are aware of real world problems and how different company are solving problems
+
+As with any systems design interview question, the first thing that we want to do is to gather system requirements; we need to figure out what system we're building exactly.
+
