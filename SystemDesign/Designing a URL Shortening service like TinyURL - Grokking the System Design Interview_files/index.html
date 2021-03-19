@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://js.educative.io/static/runjs/index.html?id=qd_0r -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <script>
+      function proxy(context, method, type) {
+        return function () {
+          method.apply(context, Array.prototype.slice.apply(arguments));
+          let args = '';
+          try {
+            args = JSON.parse(JSON.stringify(arguments));
+          }
+          catch(e) {
+            // Catch and display error if circular object found
+            args = [e.message];
+          }
+          parent.postMessage({
+            source: window.location.href,
+            event: 'console',
+            args,
+            type,
+          }, '*');
+        };
+      }
+
+      function handleMessage(event) {
+        if (
+          event.data &&
+          (event.origin.endsWith('.educative.io') ||
+            event.origin === window.origin)
+        ) {
+          document.body.innerHTML = '';
+          const iframe = document.createElement('iframe');
+          iframe.id = 'content';
+          iframe.style =
+            'position: fixed; top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%; border: none; margin: 0;padding: 0; overflow: hidden;z-index: 999999;';
+
+          document.body.appendChild(iframe);
+
+          const iframeConsole = iframe.contentWindow.console;
+
+          iframeConsole.log = proxy(iframeConsole, iframeConsole.log, 'log');
+          iframeConsole.error = proxy(
+            iframeConsole,
+            iframeConsole.error,
+            'error',
+          );
+          iframeConsole.warn = proxy(iframeConsole, iframeConsole.warn, 'warn');
+
+          iframe.contentWindow.document.open();
+          iframe.contentWindow.document.write(event.data);
+          iframe.contentWindow.document.close();
+        }
+      }
+
+      window.addEventListener('message', handleMessage, false);
+      parent.postMessage(window.location.href, '*');
+    </script>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1000.0" data-gr-ext-installed=""><iframe id="content" style="position: fixed; inset: 0px; width: 100%; height: 100%; border: none; margin: 0px; padding: 0px; overflow: hidden; z-index: 999999;" src="./saved_resource.html"></iframe></body></html>
