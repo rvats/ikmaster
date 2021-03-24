@@ -1,0 +1,26 @@
+var nums1 = [1,2,3,3,4,5]
+var nums2 = [3,3,3,3,3,3]
+var target = 6
+var twoSum = function (nums, target) {
+  var result = [];
+  var map = {};
+  var len = nums.length;
+  for (var i = 0; i < len; i++) {
+    if (target-nums[i] in map) {
+      result.push([map[target-nums[i]], i]); 
+      delete(map[target-nums[i]]);
+    }
+    else {
+      map[nums[i]] = i;
+    }
+  }
+  console.log(result); // result = [[0,1],[2.3],[4,5]]
+  return result;
+};
+twoSum(nums2,target);
+twoSum(nums1,target);
+
+/******
+Basic Two Sum Problem is 
+I use a dictionary to keep track of if the 
+*******/
