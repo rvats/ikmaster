@@ -94,10 +94,11 @@ def preOrderTraverse(tree, array):
 	return array
 
 def postOrderTraverse(tree, array):
-	if tree is not None:
-		postOrderTraverse(tree.left, array)
-		postOrderTraverse(tree.right, array)
-		array.append(tree.value)
+	if tree is None:
+		return
+	postOrderTraverse(tree.left, array)
+	postOrderTraverse(tree.right, array)
+	array.append(tree.value)
 	return array
 
 def minHeightBst(array):
@@ -144,6 +145,7 @@ bst.right.left.right = BST(14)
 bst.right.right = BST(22)
 print(bst.insert(12))
 print(validateBst(bst))
+print("In Order Traversal: ")
 print(inOrderTraverse(bst,[]))
 print(preOrderTraverse(bst,[]))
 print(postOrderTraverse(bst,[]))
