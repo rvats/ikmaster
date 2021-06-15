@@ -1,0 +1,39 @@
+SOLID is one of the most popular sets of design principles in object-oriented software development. It’s a mnemonic acronym for the following five design principles:
+
+Single Responsibility Principle
+Open/Closed Principle
+Liskov Substitution Principle
+Interface Segregation Principle
+Dependency Inversion
+
+Robert C. Martin describes Single Responsibility Principle as: A class should have one, and only one, reason to change. 
+Benefits of the Single Responsibility Principle:
+	It makes your software easier to implement and prevents unexpected side-effects of future changes.
+	Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement than the ones that provide a solution for everything. This reduces the number of bugs, improves your development speed, and makes your life as a software developer a lot easier.
+Validate Your Design: What is the responsibility of your class/component/microservice?
+
+Bertrand Meyer described as Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. A class is closed, since it may be compiled, stored in a library, baselined, and used by client classes. But it is also open, since any new class may use it as parent, adding new features. When a descendant class is defined, there is no need to change the original or to disturb its clients. But as we’ve learned over the years and as other authors explained in great details, e.g., Robert C. Martin in his articles about the SOLID principles or Joshua Bloch in his book Effective Java, inheritance introduces tight coupling if the subclasses depend on implementation details of their parent class.
+That’s why Robert C. Martin and others redefined the Open/Closed Principle to the Polymorphic Open/Closed Principle. It uses interfaces instead of superclasses to allow different implementations which you can easily substitute without changing the code that uses them. The interfaces are closed for modifications, and you can provide new implementations to extend the functionality of your software.
+The main benefit of this approach is that an interface introduces an additional level of abstraction which enables loose coupling. The implementations of an interface are independent of each other and don’t need to share any code. If you consider it beneficial that two implementations of an interface share some code, you can either use inheritance or composition.
+
+The Liskov Substitution principle was introduced by Barbara Liskov in her conference keynote “Data abstraction” in 1987.
+
+1st- programming
+2nd- (DevOps/Azure) focus area
+3rd: Consulting/teaming
+
+Controller vs RestController
+1. The @Controller is a common annotation that is used to mark a class as Spring MVC Controller while @RestController is a special controller used in RESTFul web services and the equivalent of @Controller + @ResponseBody.
+2. The @RestController is relatively new, added only on Spring 4.0 but @Controller is an old annotation, exists since Spring started supporting annotation, officially it was added on Spring 2.5 version. You can learn more about @RestController and other Spring 4 annotations on Master RESTful Web Services with Spring Boot course on Udemy. Spring boot really makes it easy to develop REST APIs with spring.
+3. The @Controller annotation indicates that the class is a "Controller" like a web controller while @RestController annotation indicates that the class is a controller where @RequestMapping methods assume @ResponseBody semantics by default i.e. servicing REST API.
+
+What are Annotations:
+A note of explanation or comment added to a text or diagram. Annotations are used to provide supplement information about a program.
+Annotations start with ‘@’.
+Annotations do not change action of a compiled program.
+Annotations help to associate metadata (information) to the program elements i.e. instance variables, constructors, methods, classes, etc.
+Annotations are not pure comments as they can change the way a program is treated by compiler. 
+
+What is your favorite product?
+Metrics for measuring success with WhatsApp
+

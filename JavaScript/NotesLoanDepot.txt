@@ -1,0 +1,53 @@
+ public static class Program
+    {
+       
+        public static void Main(string[] args)
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
+
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+    }
+    --------------------------------------------------------
+    
+  private static string result;
+ 
+  static void Main() {
+    SaySomething();
+    Console.WriteLine(result);
+  }
+ 
+  static async Task<string> SaySomething() {
+    await Task.Delay(5);
+    result = "Hello world!";
+    return “Something”;
+  }
+}
+
+-----------------------------------------------------
+class Program {
+  static String location;
+  static DateTime time;
+ 
+  static void Main() {
+    Console.WriteLine(location == null ? "location is null" : location);
+    Console.WriteLine(time == null ? "time is null" : time.ToString());
+  }
+}
+
+----------------------------------------------------------
+[HttpPost("GetData")]
+  public async Task<IActionResult> GetData(Request request)
+   {
+	    var isValidRequest = validationEngine.Validate(request);
+	If(!isValidRequest)
+	{
+		Throw;
+	}
+	
+	
+	Var data =  _repository.GetData(request);
+	
+   }
