@@ -24,11 +24,17 @@ Explanation: By calling next repeatedly until hasNext returns false, the order o
 Constraints:
 1 <= nestedList.length <= 500
 The values of the integers in the nested list is in the range [-106, 106]
+To solve the problem:
+Using Peeking Iterator Pattern.  
+I am using generators as described in https://realpython.com/introduction-to-python-generators/ Python yield generators
+I forgot the yield next in the interview scenario. Note to self: Do not make this mistake and brush up on your syntax especially if you have not been using the language of choice for interview in a while.
+Another approach could be to use stacks
 '''
 # """
 # This is the interface that allows for creating nested lists.
 # You should not implement it, or speculate about its implementation
 # """
+
 #class NestedInteger(object):
 #    def isInteger(self):
 #        """
@@ -53,45 +59,68 @@ The values of the integers in the nested list is in the range [-106, 106]
 class NestedIterator:
 
     def __init__(self, nestedList: [NestedInteger]):
-        self.list = self.generateList(nestedList)
-        self.peeked = None
+        self.list = self.GenerateList(nestedList)
+        self.peeked = None # Keep Tracked of the topmost/frontmost integer
 
-    def generateList(self, nestedList):
+    def GenerateList(self, nestedList):
         for item in nestedList:
             if item.isInteger():
                 yield item.getInteger()
             else:
-                yield from self.generateList(item.getList())
+                yield from self.GenerateList(item.getList())
     
-    def next(self) -> int:
-        if not self.hasNext(): 
+    def GetNext(self) -> int: # Change the name to what was in problem statement
+        if not self.HasNext(): 
             return None
         next, self.peeked = self.peeked, None
         return next
         
-    def hasNext(self) -> bool:
+    def HasNext(self) -> bool: # Change the name to what was in problem statement
         if self.peeked is not None: 
             return True
         try: 
-            self.peeked = next(self.list)
+            self.peeked = next(self.list) # Forgot the syntax in python and was thinking it will be the function that we are writing for getting next. Hence the confusion with circular loop. This code works as tested. 
             return True
         except: 
             return False
-        
-# Your NestedIterator object will be instantiated and called as such:
-# i, v = NestedIterator(nestedList), []
-# while i.hasNext(): v.append(i.next())
-
-# Test Run of my code: 
-## Accepted
-## Runtime: 48 ms
-## Your input
+# Test Case 1: 
 ## [1,[2,[3,4,[5,6]]]]
-## Output
-## [1,2,3,4,5,6]
-## Expected
-## [1,2,3,4,5,6]
-## Success
-## Details 
-## Runtime: 64 ms, faster than 82.24% of Python3 online submissions for Flatten Nested List Iterator.
-## Memory Usage: 17.8 MB, less than 39.09% of Python3 online submissions for Flatten Nested List Iterator.
+nestedInteger1 = NestedInteger(1)
+nestedInteger2 = NestedInteger(2)
+nestedInteger3 = NestedInteger(3)
+nestedInteger4 = NestedInteger(4)
+nestedInteger5 = NestedInteger(5)
+nestedInteger6 = NestedInteger(6)
+
+nestedList = [nestedInteger1, [nestedInteger2, [nestedInteger3, nestedInteger4, [nestedInteger5, nestedInteger6]]]]
+
+i, v = NestedIterator(nestedList), []
+while i.HasNext(): 
+    v.append(i.GetNext())
+print(v)
+
+'''
+Approach using stacks
+'''
+# Second Approach with stacks
+class NestedIterator2:
+    def __init__(self, nestedList: [NestedInteger]):
+        self.stack = nestedList[::-1]
+        self.findNextInteger()
+    
+    def findNextInteger(self):
+        # make sure the top of the stack is an integer
+        # i.e: self.stack.top().isInteger() == True
+        while len(self.stack) > 0 and not self.stack[-1].isInteger():
+            # get the list
+            l = self.stack.pop().getList()
+            while len(l) > 0:
+                self.stack.append(l.pop())
+    
+    def next(self) -> int:
+        res = self.stack.pop()
+        self.findNextInteger()
+        return res.getInteger()
+    
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
